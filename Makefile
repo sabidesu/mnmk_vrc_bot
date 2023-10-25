@@ -1,3 +1,3 @@
 main: .env bot.py
-  source .env
+	source .env
 	python3 bot.py
