@@ -15,11 +15,12 @@ def movie_request(message):
   movie = message.text
   text = f"your movie *{movie}* has been added to the list uwu _(but not actually because i haven't implemented that yet oopsies)_"
   sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
-  other_msg = bot.send_message(message.chat.id, connect_movie_db())
 
 def connect_movie_db():
-  client = Client(auth=os.environ.get('NOTION_TOKEN'))
-  page_response = client.pages.retrieve(os.environ.get('NOTION_DATABASE_ID'))
-  return page_response
+  notion = Client(auth=os.environ.get('NOTION_TOKEN'))
+  db_response = notion.databases.query(**Query(database_id=os.environ.get('NOTION_DATABASE_ID')))
+  # look into: https://github.com/altvod/basic-notion
+  return db_response
 
 bot.infinity_polling()
+print(connect_movie_db())
