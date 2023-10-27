@@ -1,6 +1,9 @@
 import os
 import telebot
+
 from notion_client import Client
+from basic_notion.query import Query
+from models import MovieList
 
 BOT_TOKEN = os.environ.get('BOT_TOKEN')
 bot = telebot.TeleBot(BOT_TOKEN)
@@ -16,11 +19,17 @@ def movie_request(message):
   text = f"your movie *{movie}* has been added to the list uwu _(but not actually because i haven't implemented that yet oopsies)_"
   sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
 
-def connect_movie_db():
+def get_movies():
   notion = Client(auth=os.environ.get('NOTION_TOKEN'))
-  db_response = notion.databases.query(**Query(database_id=os.environ.get('NOTION_DATABASE_ID')))
-  # look into: https://github.com/altvod/basic-notion
-  return db_response
+  data = notion.databases.query(
+    **Query.database(
+      database_id=os.environ.get('NOTION_DATABASE_ID')
+    ).sorts(
+      MovieList.item.name.sort.ascending
+    ).serialize()
+  )
+  return MovieList(data=data)
 
+for item in get_movies().items():
+  print(f'[{item.status.name}] {item.name.one_item.content}')
 bot.infinity_polling()
-print(connect_movie_db())
