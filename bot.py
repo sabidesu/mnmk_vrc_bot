@@ -50,15 +50,14 @@ class MovieDatabase(object):
 
     page = Movie.make(
       parent={'database_id': self.database_id},
-      name=movie,
+      name=[movie],
       status='to watch',
     )
     response = self.notion.pages.create(**page.data)
     item = Movie(data=response)
-    assert item.name == movie
+    assert item.name.get_text() == movie
     return f"your movie *{movie}* has been added to the list uwu"
 
 movieDB = MovieDatabase(os.environ.get('NOTION_DATABASE_ID'))
-print(movieDB.add_movie_to_list('the matrix (1999)'))
 
 # bot.infinity_polling()
