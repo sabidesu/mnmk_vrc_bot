@@ -30,6 +30,11 @@ def get_movies():
   )
   return MovieList(data=data)
 
-for item in get_movies().items():
-  print(f'[{item.status.name}] {item.name.one_item.content}')
-bot.infinity_polling()
+def movie_already_in_list(movie_list: MovieList, movie: str):
+  movies = {item.name.one_item.content: item.status.name for item in movie_list.items()}
+  if movie in movies.keys():
+    return movies[movie]
+  return ''
+
+print(movie_already_in_list(get_movies(), 'american pie'))
+# bot.infinity_polling()
