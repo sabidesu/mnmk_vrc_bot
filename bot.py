@@ -24,7 +24,7 @@ class MovieDatabase(object):
     self.database_id = database_id
     self.notion = Client(auth=os.environ.get('NOTION_TOKEN'))
 
-  def get_movies(self):
+  def get_movies(self) -> MovieList:
     data = self.notion.databases.query(
       **Query.database(
         database_id=self.database_id
@@ -34,7 +34,7 @@ class MovieDatabase(object):
     )
     return MovieList(data=data)
 
-  def is_movie_in_list(self, movie: str):
+  def is_movie_in_list(self, movie: str) -> str:
     movie_list = self.get_movies()
     movies = {item.name.one_item.content: item.status.name for item in movie_list.items()}
     if movie in movies.keys():
