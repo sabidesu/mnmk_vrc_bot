@@ -10,7 +10,7 @@ bot = telebot.TeleBot(BOT_TOKEN)
 
 @bot.message_handler(commands=['movierequest', 'mr'])
 def request_handler(message):
-  text = "what movie do you want to request? format your request like this: *movie name (year)*\ni.e. *the matrix (1999)*"
+  text = "what movie do you want to request? format your request like this: *movie name (year)*\ni.e. *the matrix (1999)*\n\nnote: please write the full name of the movie! this is to avoid confusion with other movies with the same name.if you're unsure, use google :)\ni.e. if you want to watch _django unchained_, instead of *django*, write *django unchained*"
   sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
   bot.register_next_step_handler(sent_msg, movie_response)
 
@@ -44,9 +44,9 @@ class MovieDatabase(object):
   def add_movie_to_list(self, movie: str) -> str:
     in_list = self.is_movie_in_list(movie)
     if in_list == 'watched':
-      return f"sorry, we've already watched *{movie}*!"
+      return f"sorry, we've already watched *{movie}*! type the command again to try another film"
     elif in_list == 'to watch':
-      return f"sorry, someone's already requested *{movie}*!"
+      return f"sorry, someone's already requested *{movie}*! type the command again to try another film"
 
     page = Movie.make(
       parent={'database_id': self.database_id},
