@@ -16,7 +16,7 @@ def request_handler(message):
 
 def movie_response(message):
   movie = message.text.strip().lower()
-  text = f"your movie *{movie}* has been added to the list uwu _(but not actually because i haven't implemented that yet oopsies)_"
+  text = movieDB.add_movie_to_list(movie)
   sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
 
 class MovieDatabase(object):
@@ -41,7 +41,7 @@ class MovieDatabase(object):
       return movies[movie]
     return ''
 
-  def add_movie_to_list(self, movie: str):
+  def add_movie_to_list(self, movie: str) -> str:
     in_list = self.is_movie_in_list(movie)
     if in_list == 'watched':
       return f"sorry, we've already watched *{movie}*!"
@@ -60,4 +60,4 @@ class MovieDatabase(object):
 
 movieDB = MovieDatabase(os.environ.get('NOTION_DATABASE_ID'))
 
-# bot.infinity_polling()
+bot.infinity_polling()
