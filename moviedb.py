@@ -1,4 +1,5 @@
 import os
+import logging
 
 from notion_client import Client
 from basic_notion.query import Query
@@ -29,8 +30,10 @@ class MovieDatabase(object):
   def add_movie_to_list(self, movie: str) -> str:
     in_list = self.is_movie_in_list(movie)
     if in_list == 'watched':
+      logging.info(f"movie {movie} already watched")
       return f"sorry, we've already watched *{movie}*! type the command again to try another film"
     elif in_list == 'to watch':
+      logging.info(f"movie {movie} already requested")
       return f"sorry, someone's already requested *{movie}*! type the command again to try another film"
 
     page = Movie.make(
