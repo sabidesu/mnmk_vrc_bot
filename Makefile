@@ -4,3 +4,6 @@ SHELL := /bin/bash
 main: .env bot.py
 	source .env; \
 	python bot.py
+
+clean: bot.log
+	rm bot.log
