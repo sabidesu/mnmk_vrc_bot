@@ -28,6 +28,7 @@ def request_handler(message):
     bot.register_next_step_handler(sent_msg, movie_response)
 
 def movie_response(message):
+  # TODO: figure out way to make sure message is from same user as command
   movie = message.text.strip().lower()
   if movie_in_valid_format(movie):
     logging.info(f"user @{message.from_user.username} requested {movie}")
