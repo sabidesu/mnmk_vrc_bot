@@ -1,6 +1,7 @@
 import os
 import telebot
 import logging
+import re
 
 from moviedb import MovieDatabase
 
@@ -18,9 +19,18 @@ def request_handler(message):
 
 def movie_response(message):
   movie = message.text.strip().lower()
-  logging.info(f"user @{message.from_user.username} requested {movie}")
-  text = movieDB.add_movie_to_list(movie)
-  sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
+  if movie_in_valid_format(movie):
+    logging.info(f"user @{message.from_user.username} requested {movie}")
+    text = movieDB.add_movie_to_list(movie)
+    sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
+  else:
+    logging.info(f"user @{message.from_user.username} movie request in invalid format, discarded: {movie}")
+    text = "sorry, your movie request was in an invalid format! type the command again to try again"
+    sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
+
+def movie_in_valid_format(movie_s: str) -> bool:
+  # make sure the movie is in the format of "movie name (year)"
+  return True if re.match(r'.*\s\(\d{4}\)', movie_s) else False
 
 movieDB = MovieDatabase(os.environ.get('NOTION_DATABASE_ID'))
 
