@@ -35,7 +35,7 @@ def request_handler(message):
     text = movieDB.add_movie_to_list(movie)
     sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
   else:
-    text = "format your request like this: *movie name (year)*\ni.e. *the matrix (1999)*\n\nnote: please write the full name of the movie! this is to avoid confusion with other movies with the same name.if you're unsure, use google :)\ni.e. if you want to watch _django unchained_, instead of *django*, write *django unchained*"
+    text = "format your request like this: *movie name (year)*\ni.e. *the matrix (1999)*\n\nnote: please write the full name of the movie! this is to avoid confusion with other movies with the same name. if you're unsure, use google :)\ni.e. if you want to watch _django unchained_, instead of *django*, write *django unchained*"
     sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
 
 def extract_movie(command: str) -> str:
