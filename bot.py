@@ -13,7 +13,7 @@ allowed_chat_ids = {
   'official_chat': int(os.environ.get('PROD_CHAT_ID')),
 }
 
-logging.basicConfig(filename='bot.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='bot.log', encoding='utf-8', level=logging.INFO)
 
 # TODO
 # [ ] add help command
