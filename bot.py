@@ -15,10 +15,10 @@ allowed_chat_ids = {
 
 logging.basicConfig(filename='bot.log', encoding='utf-8', level=logging.INFO)
 
-@bot.message_handler(commands=['start', 'help'])
+@bot.message_handler(commands=['help'])
 def help_handler(message):
   logging.info(f"received help request from user @{message.from_user.username}")
-  text = "this bot is used to request movies to watch together as a group!\n\navailable commands:\n`/movierequest movie name (year)` - adds a movie to the to watch list\n`/mr movie name (year)` - alias for `/movierequest`"
+  text = "this bot is used to request movies to watch together as a group!\n\navailable commands:\n`/help` - displays this message\n`/movierequest movie name (year)` - adds a movie to the to watch list\n`/mr movie name (year)` - alias for `/movierequest`"
   sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
 
 @bot.message_handler(commands=['movierequest', 'mr'])
