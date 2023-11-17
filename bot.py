@@ -15,14 +15,17 @@ allowed_chat_ids = {
 
 logging.basicConfig(filename='bot.log', encoding='utf-8', level=logging.INFO)
 
-# TODO
-# [ ] add help command
-# [ ] add a demo mode
+@bot.message_handler(commands=['start', 'help'])
+def help_handler(message):
+  logging.info(f"received help request from user @{message.from_user.username}")
+  text = "this bot is used to request movies to watch together as a group!\n\navailable commands:\n`/movierequest movie name (year)` - adds a movie to the to watch list\n`/mr movie name (year)` - alias for `/movierequest`"
+  sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
+
 @bot.message_handler(commands=['movierequest', 'mr'])
 def request_handler(message):
   if message.chat.id not in allowed_chat_ids.values():
     logging.info(f"received request from user @{message.from_user.username} in invalid chat: {message.chat.id}")
-    text = "sorry, this bot is only available in the testing chat or the official group chat!"
+    text = "sorry, this command is only available in the testing chat or the official group chat!"
     sent_msg = bot.reply_to(message, text, parse_mode='Markdown')
     return
 
