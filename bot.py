@@ -36,7 +36,7 @@ async def request_handler(message):
   movie = extract_movie(msg_text)
   if movie:
     logging.info(f"user @{message.from_user.username} requested {movie}")
-    text = movieDB.add_movie_to_list(movie)
+    text = await movieDB.add_movie_to_list(movie)
     sent_msg = await bot.reply_to(message, text, parse_mode='Markdown')
   else:
     text = "format your request like this: *movie name (year)*\ni.e. *the matrix (1999)*\n\nnote: please write the full name of the movie! this is to avoid confusion with other movies with the same name. if you're unsure, use google :)\ni.e. if you want to watch _django unchained_, instead of *django*, write *django unchained*"
