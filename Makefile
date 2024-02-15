@@ -5,5 +5,5 @@ main: .env src/bot.py
 	source .env; \
 	python src/bot.py
 
-clean: bot.log __pycache__
-	rm -rf bot.log __pycache__
+clean: bot.log src/__pycache__
+	rm -rf bot.log src/__pycache__
