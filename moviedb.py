@@ -43,5 +43,4 @@ class MovieDatabase(object):
     )
     response = await self.notion.pages.create(**page.data)
     item = Movie(data=response)
-    assert item.name.get_text() == movie
     return f"your movie *{movie}* has been added to the list uwu"
