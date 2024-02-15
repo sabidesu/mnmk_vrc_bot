@@ -11,6 +11,7 @@ python 3.12.0
 - [notion-client](https://pypi.org/project/notion-client/) >= 2.0.0
 - [basic-notion](https://pypi.org/project/basic-notion/) >= 0.6.2
 - [pyTelegramBotAPI](https://pypi.org/project/pyTelegramBotAPI/) >= 4.14.0
+- aiohttp >= 3.9.3
 
 you can install the necessary libraries with this command:
 
