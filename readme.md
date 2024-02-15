@@ -16,5 +16,5 @@ python 3.12.0
 you can install the necessary libraries with this command:
 
 ```sh
-python -m pip install pyTelegramBotAPI basic-notion notion-client
+python -m pip install pyTelegramBotAPI basic-notion notion-client aiohttp
 ```
