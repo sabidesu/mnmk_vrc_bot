@@ -50,4 +50,7 @@ def extract_movie(command: str) -> str:
 
 movieDB = MovieDatabase(os.environ.get('NOTION_DATABASE_ID'))
 
-asyncio.run(bot.polling())
+# use infinity_polling in hopes that bot won't crash as often. things to check if still erroring
+# - https://github.com/aio-libs/aiohttp/issues/850
+# - https://stackoverflow.com/questions/77402707/telebot-infinity-polling-exception-connection-aborted-remotedisconnected
+asyncio.run(bot.infinity_polling())
