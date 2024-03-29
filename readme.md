@@ -4,17 +4,8 @@ my friends and i like to watch movies in vrchat on monday nights, and i keep a [
 
 ## dependencies
 
-python 3.12.0
-
-### python libraries
-
-- [notion-client](https://pypi.org/project/notion-client/) >= 2.0.0
-- [basic-notion](https://pypi.org/project/basic-notion/) >= 0.6.2
-- [pyTelegramBotAPI](https://pypi.org/project/pyTelegramBotAPI/) >= 4.14.0
-- aiohttp >= 3.9.3
-
-you can install the necessary libraries with this command:
+you need python 3.12.0 for this project (i'm assuming it'll work with later versions of python too, tho). i recommend creating a [virtual environment](https://docs.python.org/3/library/venv.html), and then once you make it, you can install the necessary libraries with this command:
 
 ```sh
-python -m pip install pyTelegramBotAPI basic-notion notion-client aiohttp
+python -m pip install -r requirements.txt
 ```
