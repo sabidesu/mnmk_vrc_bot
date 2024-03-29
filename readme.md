@@ -4,9 +4,7 @@ my friends and i like to watch movies in vrchat on monday nights, and i keep a [
 
 ## dependencies
 
-python 3.12.0
-
-you can install the necessary libraries with this command:
+you need python 3.12.0 for this project (i'm assuming it'll work with later versions of python too, tho). i recommend creating a [virtual environment](https://docs.python.org/3/library/venv.html), and then once you make it, you can install the necessary libraries with this command:
 
 ```sh
 python -m pip install -r requirements.txt
